@@ -3,6 +3,7 @@ import { useFrame } from "@react-three/fiber";
 import { Vector3, Matrix4, Mesh, Color, Quaternion } from "three";
 import { usePlayerControls } from "../hooks/usePlayerControls";
 import { useRef } from "react";
+import { WebGPUToonMaterial } from "./WebGPUToonMaterial";
 
 export const playerPosition = new Vector3(0, 0, 0);
 
@@ -54,6 +55,6 @@ export function Player() {
 
   return <mesh ref={playerRef} >
     <capsuleGeometry args={[0.3, 0.5, 4, 8, 1]} />
-    <meshToonMaterial wireframe color={new Color("#ff0000")} />
+    {/* <WebGPUToonMaterial color={'#aaff44'} preset={'sixTone'}/> */}
   </mesh>;
 }

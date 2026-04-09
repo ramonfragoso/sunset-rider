@@ -6,7 +6,6 @@ import { useRef } from "react";
 import { useDebugUI } from "./hooks/useDebugUI";
 import { Leva } from "leva";
 import { Lights } from "./components/Lights";
-import { Floor } from "./components/Floor";
 import { Player } from "./components/Player";
 import { TestFloor } from "./components/TestFloor";
 
@@ -22,7 +21,7 @@ export default function Home() {
 
       <Canvas
         shadows
-        dpr={[0.5, 0.8]}
+        dpr={[1.0, 2.0]}
         camera={{ position: [1000, 1000, 1000], fov: 45, near: 0.1, far: 5000 }}
         gl={{
           antialias: true,

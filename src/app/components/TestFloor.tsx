@@ -10,8 +10,6 @@ const CHUNK_COUNT = 9;
 const floorVertexShader = /* glsl */ `
   uniform float uTime;
   varying float height;
-  uniform vec2 uOffset;
-  uniform float uRotation;
   uniform vec2 uChunkOffset;
 
   float hash(vec2 p) {
@@ -47,12 +45,6 @@ const floorVertexShader = /* glsl */ `
           amplitude *= 0.5;
       }
       return value;
-  }
-
-  mat2 rotate2D(float angle) {
-      float s = sin(angle);
-      float c = cos(angle);
-      return mat2(c, -s, s, c);
   }
 
   void main() {
