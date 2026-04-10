@@ -78,7 +78,7 @@ function Scene() {
         color="#3CF0B5"
         toonPreset="sixTone"
       />
-      <mesh
+      {/* <mesh
         position={[0, -2.6, 0]}
         rotation={[0, 0, 0]}
         // castShadow
@@ -86,7 +86,7 @@ function Scene() {
       >
         <boxGeometry args={[100, 1, 100, 30]} />
         <WebGPUToonMaterial color="#F0603C" preset="threeTone" />
-      </mesh>
+      </mesh> */}
       <mesh
         position={[4, 1, 5]}
         castShadow
@@ -109,7 +109,7 @@ function Scene() {
         enableRotate={true}
         makeDefault
       />
-      <WebGPUFloor/>
+      <WebGPUFloor />
     </group>
   );
 }
@@ -139,9 +139,9 @@ export default function Home() {
             background
           />
 
-          <PostProcessing normalEdgeStrength={3} radius={1} depthEdgeStrength={3} strength={0.3} threshold={0.8} />
+          {/* <PostProcessing normalEdgeStrength={3} radius={1} depthEdgeStrength={3} strength={0.3} threshold={0.8} /> */}
           <Scene />
-          <Player/>
+          <Player />
         </Suspense>
       </WebGPUCanvas>
     </div>

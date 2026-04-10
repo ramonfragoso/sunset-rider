@@ -76,8 +76,8 @@ function getChunkPositions(pos: THREE.Vector3) {
   for (let cx = -1; cx <= 1; cx++) {
     for (let cz = -1; cz <= 1; cz++) {
       chunks.push({
-        chunkX: (currentChunkX + cx) * CHUNK_SIZE,
-        chunkZ: (currentChunkZ + cz) * CHUNK_SIZE
+        chunkX: (currentChunkX + cx) * CHUNK_SIZE + CHUNK_SIZE / 2,
+        chunkZ: (currentChunkZ + cz) * CHUNK_SIZE + CHUNK_SIZE / 2
       })
     }
   }

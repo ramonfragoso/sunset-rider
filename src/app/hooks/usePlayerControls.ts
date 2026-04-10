@@ -57,7 +57,7 @@ export function usePlayerControls() {
       camera: PerspectiveCamera | OrthographicCamera,
       delta: number,
     ) => {
-      const { forward,  left, right } = movement.current;
+      const { forward, backward, left, right } = movement.current;
 
       const deltaTime = delta * 60;
 
@@ -65,7 +65,11 @@ export function usePlayerControls() {
 
       if (forward) {
         speed += 0.005 * deltaTime;
-      } else {
+      }
+      if (backward) {
+        speed -= 0.005 * deltaTime;
+      }
+      if (!forward && !backward) {
         speed *= Math.pow(0.95, deltaTime);
       }
       if (left) {

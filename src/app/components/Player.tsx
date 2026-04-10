@@ -55,6 +55,6 @@ export function Player() {
 
   return <mesh ref={playerRef} >
     <capsuleGeometry args={[0.3, 0.5, 4, 8, 1]} />
-    {/* <WebGPUToonMaterial color={'#aaff44'} preset={'sixTone'}/> */}
+    <WebGPUToonMaterial color={'#ff0000'} preset={'sixTone'}/>
   </mesh>;
 }
