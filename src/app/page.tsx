@@ -46,9 +46,9 @@ export default function Home() {
 
   return (
     <div className="w-full h-screen">
-      <div className="z-50 absolute  overflow-auto top-1 right-1 rounded-md max-w-[370px] ">
+      {/* <div className="z-50 absolute  overflow-auto top-1 right-1 rounded-md max-w-[370px] ">
         <Leva fill />
-      </div>
+      </div> */}
 
       <WebGPUCanvas
         dpr={[1.0, 2.0]}
