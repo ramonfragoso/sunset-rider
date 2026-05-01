@@ -2,7 +2,7 @@
 import { useThree } from "@react-three/fiber";
 import { Environment } from "@react-three/drei";
 import * as THREE from "three";
-import { Suspense, useEffect, useRef } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { Leva } from "leva";
 import { fog, color, densityFogFactor, float } from "three/tsl";
 import { Lights } from "./components/Lights";
@@ -40,15 +40,31 @@ function Scene() {
   );
 }
 
+function SceneReadyReporter({ onReady }: { onReady: () => void }) {
+  useEffect(() => {
+    onReady();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  return null;
+}
+
 export default function Home() {
   const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
   const { train, trainLights, trainEmissive, trainSun, clouds } = useDebugUI();
+  const [sceneReady, setSceneReady] = useState(false);
+  const [overlayVisible, setOverlayVisible] = useState(true);
+
+  useEffect(() => {
+    if (!sceneReady) return;
+    const timeout = setTimeout(() => setOverlayVisible(false), 2000);
+    return () => clearTimeout(timeout);
+  }, [sceneReady]);
 
   return (
     <div className="w-full h-screen">
-      {/* <div className="z-50 absolute  overflow-auto top-1 right-1 rounded-md max-w-[370px] ">
-        <Leva fill />
-      </div> */}
+      <div className="z-50 absolute  overflow-auto top-1 right-1 rounded-md max-w-[370px] ">
+        <Leva hidden />
+      </div>
 
       <WebGPUCanvas
         dpr={[1.0, 2.0]}
@@ -81,8 +97,19 @@ export default function Home() {
             emissive={trainEmissive}
             sun={trainSun}
           />
+          <SceneReadyReporter onReady={() => setSceneReady(true)} />
         </Suspense>
       </WebGPUCanvas>
+
+      {overlayVisible && (
+        <div
+          className="absolute inset-0 bg-black pointer-events-none z-40"
+          style={{
+            transition: sceneReady ? "opacity 2s ease-in-out" : "none",
+            opacity: sceneReady ? 0 : 1,
+          }}
+        />
+      )}
     </div>
   );
 }
