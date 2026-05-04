@@ -4,14 +4,14 @@ import { Vector2, Vector3, Matrix4, Mesh, Quaternion, Euler } from "three";
 import { useEffect, useRef } from "react";
 import { WebGPUToonMaterial } from "./WebGPUToonMaterial";
 
-const PATH_NUM_POINTS = 50;
-const PATH_DIAMETER = 20000;
-const PATH_CIRCLE_RADIUS = PATH_DIAMETER / 2;
-const PATH_CENTER_X = PATH_CIRCLE_RADIUS;
-const PATH_CENTER_Z = 0;
+const PATH_NUM_POINTS = 500;
+const PATH_DIAMETER = 5000;
+export const PATH_CIRCLE_RADIUS = PATH_DIAMETER / 2;
+export const PATH_CENTER_X = PATH_CIRCLE_RADIUS;
+export const PATH_CENTER_Z = 0;
 const PLAYER_HEIGHT = 21;
 
-const PATH_POINTS = Array.from({ length: PATH_NUM_POINTS }, (_, i) => {
+export const PATH_POINTS = Array.from({ length: PATH_NUM_POINTS }, (_, i) => {
   const t = Math.PI + (i / PATH_NUM_POINTS) * Math.PI * 2;
   const px = PATH_CENTER_X + PATH_CIRCLE_RADIUS * Math.cos(t);
   const pz = PATH_CENTER_Z + PATH_CIRCLE_RADIUS * Math.sin(t);

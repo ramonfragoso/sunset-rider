@@ -14,6 +14,7 @@ import { ChunkCacti } from "./components/ChunkCacti";
 import { Player } from "./components/Player";
 import { Clouds } from "./components/Clouds";
 import { Train } from "./components/Train";
+import { RailPieces } from "./components/RailPieces";
 
 function SceneFog() {
   const { scene } = useThree();
@@ -50,7 +51,8 @@ function SceneReadyReporter({ onReady }: { onReady: () => void }) {
 
 export default function Home() {
   const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
-  const { train, trainLights, trainEmissive, trainSun, clouds } = useDebugUI();
+  const { train, trainLights, trainEmissive, trainSun, clouds, rails } = useDebugUI();
+
   const [sceneReady, setSceneReady] = useState(false);
   const [overlayVisible, setOverlayVisible] = useState(true);
 
@@ -63,7 +65,7 @@ export default function Home() {
   return (
     <div className="w-full h-screen">
       <div className="z-50 absolute  overflow-auto top-1 right-1 rounded-md max-w-[370px] ">
-        <Leva hidden />
+        <Leva fill />
       </div>
 
       <WebGPUCanvas
@@ -91,6 +93,7 @@ export default function Home() {
           />
           <Scene />
           <Player />
+          <RailPieces spacing={rails.spacing} height={rails.height} scale={rails.scale} />
           <Train
             yOffset={train.yOffset}
             trainLights={trainLights}

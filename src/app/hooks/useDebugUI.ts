@@ -68,6 +68,12 @@ export const useDebugUI = () => {
     helperSize: { value: 17, min: 0.5, max: 30, step: 0.5 },
   }, { collapsed: true });
 
+  const railsControls = useControls("Rails", {
+    spacing: { value: 50, min: 10, max: 2000, step: 10 },
+    height: { value: 1.8, min: -100, max: 100, step: 0.5 },
+    scale: { value: 1, min: 0.1, max: 30, step: 0.1 },
+  }, { collapsed: true });
+
   const trainLightsControls = useControls("Train Lights", {
     showHelpers: true,
     light1Color: "#ff4400",
@@ -98,5 +104,6 @@ export const useDebugUI = () => {
     trainLights: trainLightsControls,
     trainEmissive: trainEmissiveControls,
     trainSun: trainSunControls,
+    rails: railsControls,
   };
 };
