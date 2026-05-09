@@ -352,7 +352,6 @@ export function Train({
       <primitive object={built.scene} />
 
       {sun?.enabled && <TrainSun sun={sun} />}
-
     </group>
   );
 }

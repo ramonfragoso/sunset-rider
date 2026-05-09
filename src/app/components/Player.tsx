@@ -74,7 +74,7 @@ const _worldCamQuat = new Quaternion();
 const _cameraMatrix = new Matrix4();
 const _meshMatrix = new Matrix4();
 const _yAxis = new Vector3(0, 1, 0);
-const _trainOffsetQuat = new Quaternion().setFromAxisAngle(_yAxis, Math.PI / 2);
+const _trainOffsetQuat = new Quaternion().setFromAxisAngle(_yAxis, -Math.PI / 2);
 const _localOffsetXZ = new Vector2();
 
 // ── Polygon utilities ────────────────────────────────────────────────────────
@@ -133,7 +133,7 @@ function clampToPolygon(p: Vector2, poly: Vector2[]) {
 
 export function Player() {
   const playerRef = useRef<Mesh>(null);
-  const targetIndexRef = useRef(1);
+  const targetIndexRef = useRef(PATH_POINTS.length - 1);
 
   useEffect(() => {
     const canvas = document.querySelector("canvas");
@@ -173,7 +173,8 @@ export function Player() {
 
     if (distToTarget <= trainStep) {
       trainPosition.copy(target);
-      targetIndexRef.current = (targetIndexRef.current + 1) % PATH_POINTS.length;
+      targetIndexRef.current =
+        (targetIndexRef.current - 1 + PATH_POINTS.length) % PATH_POINTS.length;
     } else {
       _trainToTarget.normalize().multiplyScalar(trainStep);
       trainPosition.add(_trainToTarget);

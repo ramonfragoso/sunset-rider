@@ -53,6 +53,13 @@ export const useDebugUI = () => {
     yOffset: { value: -13, min: -50, max: 0, step: 0.5 },
   }, { collapsed: true });
 
+  const audioControls = useControls("Audio", {
+    enabled: true,
+    volume: { value: 0.45, min: 0, max: 1, step: 0.01 },
+    fadeInMs: { value: 4000, min: 0, max: 15000, step: 100 },
+    playbackRate: { value: 1, min: 0.25, max: 2, step: 0.01 },
+  }, { collapsed: true });
+
   const trainEmissiveControls = useControls("Train Emissive", {
     color: "#ffaa33",
     intensity: { value: 4, min: 0, max: 50, step: 0.1 },
@@ -100,6 +107,7 @@ export const useDebugUI = () => {
     model: modelControls,
     groundControls,
     clouds: cloudsControls,
+    audio: audioControls,
     train: trainControls,
     trainLights: trainLightsControls,
     trainEmissive: trainEmissiveControls,

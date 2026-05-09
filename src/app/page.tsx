@@ -15,6 +15,7 @@ import { Player } from "./components/Player";
 import { Clouds } from "./components/Clouds";
 import { Train } from "./components/Train";
 import { RailPieces } from "./components/RailPieces";
+import { useManagedSound } from "./hooks/useManagedSound";
 
 function SceneFog() {
   const { scene } = useThree();
@@ -49,9 +50,31 @@ function SceneReadyReporter({ onReady }: { onReady: () => void }) {
   return null;
 }
 
+type AudioControls = ReturnType<typeof useDebugUI>["audio"];
+
+function SceneAudio({
+  controls,
+  active,
+}: {
+  controls: AudioControls;
+  active: boolean;
+}) {
+  useManagedSound({
+    src: "/train_sound.mp3",
+    autoplay: active,
+    enabled: active && controls.enabled,
+    loop: true,
+    volume: controls.volume,
+    fadeInMs: controls.fadeInMs,
+    playbackRate: controls.playbackRate,
+  });
+
+  return null;
+}
+
 export default function Home() {
   const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
-  const { train, trainLights, trainEmissive, trainSun, clouds, rails } = useDebugUI();
+  const { train, trainLights, trainEmissive, trainSun, clouds, rails, audio } = useDebugUI();
 
   const [sceneReady, setSceneReady] = useState(false);
   const [overlayVisible, setOverlayVisible] = useState(true);
@@ -91,6 +114,7 @@ export default function Home() {
             height={clouds.height}
             speed={clouds.speed}
           />
+          <SceneAudio controls={audio} active={sceneReady} />
           <Scene />
           <Player />
           <RailPieces spacing={rails.spacing} height={rails.height} scale={rails.scale} />
